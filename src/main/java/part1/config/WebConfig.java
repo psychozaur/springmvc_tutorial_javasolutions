@@ -8,7 +8,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("main.java.part1.controller") //pakiet gdzie bedziemy poszukiwac kontrolerow
+@ComponentScan("main.java.part1") //pakiet gdzie bedziemy poszukiwac kontrolerow?
+                                    //ma zasięgiem obejmować wszystkie adnotacje Component, więc niekoniecznie
 public class WebConfig implements WebMvcConfigurer {
 
     public void configureViewResolvers(ViewResolverRegistry registry) {

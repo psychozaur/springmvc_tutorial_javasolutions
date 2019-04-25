@@ -10,6 +10,9 @@
     </title>
 </head>
 <body>
+<div style="text-align: center">
+    <a href="register">Register</a>
+</div>
 <h1>Hello ${nick}!</h1>
 <ul>
 <c:forEach var="product" items="${products}">
