@@ -5,20 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Home</title>
 </head>
 <body>
 <div style="text-align: center">
-    <a href="login">Login</a> <a href="register">Register</a>
+    <a href="login">Login</a>
+    <a href="register">Register</a>
+    <a href="products/ALL">Products</a>
 </div>
-<h1>Hello ${nick}!</h1>
-<ul>
-<c:forEach var="product" items="${products}">
-    <c:if test="${product.category == 'artykuly do mycia'}">
-<li>${product.name}
-</li>
-</c:if>
-</c:forEach>
-</ul>
+
 </body>
 </html>
