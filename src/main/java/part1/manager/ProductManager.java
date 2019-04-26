@@ -23,11 +23,15 @@ public class ProductManager {
         Product prod2 = new Product("T-Shirt2", "koszulki");
         Product prod3 = new Product("Trousers1", "spodnie");
         Product prod4 = new Product("Trousers2", "spodnie");
+        Product prod5 = new Product("Hoodie1", "bluzy");
+        Product prod6 = new Product("Hoodie2", "bluzy");
 
         products.add(prod);
         products.add(prod2);
         products.add(prod3);
         products.add(prod4);
+        products.add(prod5);
+        products.add(prod6);
 
         return products;
     }
@@ -54,6 +58,7 @@ public class ProductManager {
         List<String> result = new ArrayList<>();
         result.add("koszulki");
         result.add("spodnie");
+        result.add("bluzy");
         return result;
     }
 }

@@ -5,13 +5,12 @@ import main.java.part1.pojo.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
@@ -22,7 +21,8 @@ public class ProductController {
 
     @GetMapping(value = "/products/{category}")
     public String products(Model model, @PathVariable("category") String category,
-                           @RequestParam(value = "count", required=false, defaultValue = "1") String count){
+                           @MatrixVariable(value = "sortBy", pathVar = "category", required = false)
+                                   List<String> sortCriteria){
 
         List<Product> products;
         if(category.equals("ALL")){
@@ -31,13 +31,34 @@ public class ProductController {
             products = productManager.findByCategory(category);
         }
 
-        products = getByCount(count, products);
+        products = getSorted(products, sortCriteria);
 
         List<String> categories = productManager.getCategories();
 
         model.addAttribute("products", products);
         model.addAttribute("categories",categories);
         return "products";
+    }
+
+    private List<Product> getSorted(List<Product> products, List<String> sortCriteria) {
+
+        if (null == sortCriteria){
+            return products;
+        }
+
+        Comparator<Product> comparator = null;
+
+        if(sortCriteria.contains("name")){
+            comparator = Comparator.comparing(Product::getName);
+        }
+
+        if(sortCriteria.contains("name") && sortCriteria.contains("category")){
+            comparator = Comparator.comparing(Product::getName).thenComparing(Product::getCategory);
+        }
+
+        return products.stream()
+                .sorted(comparator)
+                .collect(Collectors.toList());
     }
 
     private List<Product> getByCount(String count, List<Product> products){
